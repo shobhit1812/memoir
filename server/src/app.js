@@ -20,4 +20,8 @@ app.get("/", (_, res) => {
   res.send({ status: 200, message: "ok" });
 });
 
+import userRoutes from "./routes/user.routes.js";
+
+app.use("/api/v1/users", userRoutes);
+
 export { app };
