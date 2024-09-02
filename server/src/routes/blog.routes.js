@@ -6,6 +6,8 @@ import {
   editBlog,
   deleteBlog,
   getAllBlogs,
+  getMyBlogs,
+  getBlogById,
 } from "../controllers/blog.controller.js";
 
 const router = Router();
@@ -34,5 +36,7 @@ router.route("/edit-blog/:blogId").put(
 
 router.route("/delete-blog/:blogId").delete(verifyJWT, deleteBlog);
 router.route("/get-all-blogs").get(verifyJWT, getAllBlogs);
+router.route("/get-my-blogs").get(verifyJWT, getMyBlogs);
+router.route("/get-blog/:blogId").get(verifyJWT, getBlogById);
 
 export default router;

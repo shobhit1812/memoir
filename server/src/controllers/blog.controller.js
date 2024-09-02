@@ -1,10 +1,10 @@
 import Blog from "../models/blog.model.js";
 import User from "../models/user.model.js";
+import { v2 as cloudinary } from "cloudinary";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
-import { v2 as cloudinary } from "cloudinary";
 
 const extractPublicId = (url) => {
   const parts = url.split("/");
@@ -158,4 +158,49 @@ const getAllBlogs = asyncHandler(async (_, res) => {
   }
 });
 
-export { createBlog, editBlog, deleteBlog, getAllBlogs };
+const getMyBlogs = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+
+  const userBlogs = await Blog.find({ owner: userId })
+    .select("title description coverImage createdAt")
+    .populate({
+      path: "owner",
+      select: "fullName email",
+    });
+
+  if (!userBlogs.length) {
+    throw new ApiError(404, "No blogs found for this user");
+  }
+
+  return res.status(200).json({
+    status: 200,
+    message: "User's blogs fetched successfully",
+    data: userBlogs,
+  });
+});
+
+const getBlogById = asyncHandler(async (req, res) => {
+  const { blogId } = req.params;
+
+  const blog = await Blog.findById(blogId).populate({
+    path: "owner",
+    select: "fullName  email",
+  });
+
+  if (!blog) {
+    throw new ApiError(404, "Blog not found");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, blog, "Blog fetched successfully"));
+});
+
+export {
+  createBlog,
+  editBlog,
+  deleteBlog,
+  getAllBlogs,
+  getMyBlogs,
+  getBlogById,
+};
