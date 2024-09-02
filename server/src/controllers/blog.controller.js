@@ -100,6 +100,41 @@ const editBlog = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, blog, "Blog updated successfully"));
 });
 
+const deleteBlog = asyncHandler(async (req, res) => {
+  const { blogId } = req.params;
+
+  const blog = await Blog.findById(blogId);
+
+  if (!blog) {
+    throw new ApiError(404, "Blog not found");
+  }
+
+  if (blog.owner.toString() !== req.user._id.toString()) {
+    throw new ApiError(403, "You are not authorized to delete this blog");
+  }
+
+  const path = "memoir/coverImage";
+
+  if (blog.coverImage) {
+    const publicId = extractPublicId(blog.coverImage);
+    if (publicId) {
+      await cloudinary.uploader.destroy(`${path}/${publicId}`);
+    } else {
+      throw new ApiError(401, "coverImage does not exists");
+    }
+  }
+
+  await blog.deleteOne();
+
+  await User.findByIdAndUpdate(req.user._id, {
+    $pull: { blog: blogId },
+  });
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, {}, "Blog deleted successfully"));
+});
+
 const getAllBlogs = asyncHandler(async (_, res) => {
   try {
     const blogs = await Blog.find({})
@@ -123,4 +158,4 @@ const getAllBlogs = asyncHandler(async (_, res) => {
   }
 });
 
-export { createBlog, editBlog, getAllBlogs };
+export { createBlog, editBlog, deleteBlog, getAllBlogs };
