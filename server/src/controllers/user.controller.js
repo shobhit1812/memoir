@@ -125,4 +125,18 @@ const logoutUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "User logged out"));
 });
 
-export { registerUser, loginUser, logoutUser };
+const getAllUsers = asyncHandler(async (req, res) => {
+  try {
+    const users = await User.find().select(
+      "-username -email -avatar -createdAt -updatedAt -__v -password -refreshToken"
+    );
+
+    res
+      .status(200)
+      .json(new ApiResponse(200, users, "Users fetched successfully"));
+  } catch (error) {
+    throw new ApiError(500, "Error fetching users");
+  }
+});
+
+export { registerUser, loginUser, logoutUser, getAllUsers };
