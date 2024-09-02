@@ -7,13 +7,13 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const uploadOnCloudinary = async (localFilePath) => {
+const uploadOnCloudinary = async (localFilePath, folder_name) => {
   try {
     if (!localFilePath) return null;
 
     const response = await cloudinary.uploader.upload(localFilePath, {
       resource_type: "auto",
-      folder: "memoir/avatar",
+      folder: `memoir/${folder_name}`,
     });
 
     fs.unlinkSync(localFilePath);
