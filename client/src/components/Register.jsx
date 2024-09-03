@@ -1,12 +1,12 @@
+import axios from "axios";
 import { useState } from "react";
+import { PiEye } from "react-icons/pi";
+import { BiHide } from "react-icons/bi";
 import { Label } from "@radix-ui/react-label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { BiHide } from "react-icons/bi";
-import { PiEye } from "react-icons/pi";
 import { ThreeDots } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { BASE_URL } from "@/utils/constants/server_url";
 
 const Register = () => {

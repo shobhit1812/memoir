@@ -1,15 +1,15 @@
-import { Button } from "@/components/ui/button";
+import axios from "axios";
+import { useState } from "react";
+import { PiEye } from "react-icons/pi";
+import { BiHide } from "react-icons/bi";
+import { useDispatch } from "react-redux";
+import { Rings } from "react-loader-spinner";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { BiHide } from "react-icons/bi";
-import { PiEye } from "react-icons/pi";
-import { Rings } from "react-loader-spinner";
-import { BASE_URL } from "@/utils/constants/server_url.js";
-import axios from "axios";
-import { useDispatch } from "react-redux";
 import { addUser } from "@/utils/slices/userSlice.js";
+import { BASE_URL } from "@/utils/constants/server_url.js";
 
 const Login = () => {
   const [email, setEmail] = useState("");
