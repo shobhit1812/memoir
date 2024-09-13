@@ -1,9 +1,12 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import BlogsCard from "./BlogsCard";
 import { BASE_URL } from "@/utils/constants/server_url";
 
 const Blogs = () => {
-  const getAllBLogs = async () => {
+  const [blogs, setBlogs] = useState([]);
+
+  const getAllBlogs = async () => {
     const token = localStorage.getItem("accessToken");
 
     try {
@@ -12,18 +15,26 @@ const Blogs = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      const response = blogs.data;
-      console.log(response);
+      const response = blogs.data.data;
+      setBlogs(response);
     } catch (error) {
       console.error("Error fetching blogs:", error);
     }
   };
 
   useEffect(() => {
-    getAllBLogs();
+    getAllBlogs();
   }, []);
 
-  return <div>Hello</div>;
+  return (
+    <div className="p-5 max-w-screen-lg mx-auto">
+      <div className="flex flex-wrap justify-center md:justify-center">
+        {blogs.map((blog) => (
+          <BlogsCard key={blog._id} {...blog} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Blogs;

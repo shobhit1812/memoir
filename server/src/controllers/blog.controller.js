@@ -138,7 +138,7 @@ const deleteBlog = asyncHandler(async (req, res) => {
 const getAllBlogs = asyncHandler(async (_, res) => {
   try {
     const blogs = await Blog.find({})
-      .select("title description coverImage owner")
+      .select("title description coverImage owner createdAt")
       .populate({
         path: "owner",
         select: "fullName email avatar",
