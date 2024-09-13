@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import Blogs from "./Blogs";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Browse = () => {
   const user = useSelector((store) => store.user);
@@ -15,9 +17,12 @@ const Browse = () => {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#09090b] text-[#fafafa]">
+    <div className="scroll-smooth min-h-screen flex flex-col bg-[#09090b] text-[#fafafa]">
       <Navbar />
-      <main className="flex-grow">{/* Content goes here */}</main>
+      <main className="flex-grow">
+        {/* Content goes here */}
+        <Blogs />
+      </main>
       <Footer />
     </div>
   );

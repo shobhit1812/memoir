@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -38,25 +37,26 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex items-center justify-between p-4 shadow-lg">
-      <div className="text-lg font-semibold">Welcome {user?.fullName}.</div>
-
-      <div className="relative">
-        <Avatar onClick={toggleMenu} className="cursor-pointer">
-          <AvatarImage src={user?.avatar} alt="avatar" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-        {isMenuOpen && (
-          <div className="absolute right-0 mt-2 w-32 rounded-lg bg-slate-600">
-            <Button
-              onClick={handleLogout}
-              className="w-full text-center"
-              variant="destructive"
-            >
-              Logout
-            </Button>
-          </div>
-        )}
+    <nav className="p-5 sticky top-0 backdrop-blur-lg z-50 isDark shadow-lg">
+      <div className="flex justify-between items-center mx-auto max-w-screen-xl px-6 md:px-16 lg:px-36">
+        <div className="text-lg font-semibold">Welcome {user?.fullName}.</div>
+        <div className="flex-col md:flex-row md:flex md:items-center transition-all duration-300 ease-in-out ">
+          <Avatar onClick={toggleMenu} className="cursor-pointer">
+            <AvatarImage src={user?.avatar} alt="avatar" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+          {isMenuOpen && (
+            <div className="absolute right-0 mt-2 w-32 rounded-lg bg-slate-600">
+              <Button
+                onClick={handleLogout}
+                className="w-full text-center"
+                variant="destructive"
+              >
+                Logout
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
     </nav>
   );
