@@ -23,10 +23,10 @@ const Browse = () => {
   }, [dispatch, user, navigate]);
 
   return (
-    <div className="scroll-smooth min-h-screen flex flex-col bg-[#09090b] text-[#fafafa]">
+    <div className="scroll-smooth min-h-screen antialiased flex flex-col bg-[#09090b] text-[#fafafa]">
       <Navbar />
-      <main className="flex-grow">
-        {/* Content goes here */}
+      {/* Main content stays centered */}
+      <main className="flex-grow flex justify-center items-center">
         <Blogs />
       </main>
       <Footer />

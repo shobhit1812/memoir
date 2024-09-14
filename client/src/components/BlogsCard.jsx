@@ -13,14 +13,14 @@ const BlogsCard = ({ title, description, owner, createdAt }) => {
   const date = new Date(createdAt).toISOString().split("T")[0];
 
   return (
-    <Card className="w-full md:w-[410px] my-4 mx-auto md:mx-2">
+    <Card className="w-full h-full shadow-lg rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl">
       <CardHeader>
-        <CardTitle className="cursor-pointer">
+        <CardTitle className="cursor-pointer text-xl font-semibold">
           {title.length > 20 ? `${title.substring(0, 20)}...` : title}
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <CardDescription>
+        <CardDescription className="text-sm">
           {description.length > 100
             ? `${description.substring(0, 100)}...`
             : description}
@@ -29,7 +29,7 @@ const BlogsCard = ({ title, description, owner, createdAt }) => {
           </span>
         </CardDescription>
       </CardContent>
-      <CardFooter className="flex justify-between">
+      <CardFooter className="flex justify-between text-xs">
         <CardDescription>{date}</CardDescription>
         <CardDescription>{name}</CardDescription>
       </CardFooter>

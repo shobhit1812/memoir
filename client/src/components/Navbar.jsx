@@ -1,19 +1,22 @@
 import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "@/utils/constants/server_url";
 import { removeUser } from "@/utils/slices/userSlice.js";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const handleLogout = async () => {
     try {
@@ -25,11 +28,9 @@ const Navbar = () => {
       });
 
       dispatch(removeUser());
-
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("user");
-
       navigate("/");
     } catch (error) {
       console.error("Logout failed:", error.response?.data || error?.message);
@@ -38,30 +39,47 @@ const Navbar = () => {
 
   return (
     <nav className="p-5 sticky top-0 bg-[#09090b] z-50 shadow-2xl">
-      <div className="flex justify-between items-center mx-auto max-w-screen-xl px-6 md:px-16 lg:px-36">
-        <div className="text-lg font-semibold">Welcome {user?.fullName}.</div>
+      <div className="flex justify-between items-center max-w-screen-xl mx-auto">
+        {/* Welcome message aligned to the left */}
+        <div className="text-lg font-semibold text-left">
+          Welcome {user?.fullName}.
+        </div>
+
+        {/* Avatar on the right */}
         <div className="relative">
-          <Avatar onClick={toggleMenu} className="cursor-pointer">
-            <AvatarImage src={user?.avatar} alt="avatar" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          {isMenuOpen && (
-            <div
-              className="absolute right-0 mt-3 w-32 rounded-lg bg-slate-600 shadow-lg
-               z-10"
-            >
-              <Button
-                onClick={handleLogout}
-                className="w-full text-center"
-                variant="destructive"
-              >
-                Logout
-              </Button>
-            </div>
-          )}
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-[#09090b] text-[#fafafa]">
+                  <Avatar>
+                    <AvatarImage src={user?.avatar} alt="avatar" />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[100px] gap-1 p-2 md:w-[100px] md:grid-cols-1 lg:w-[100px]">
+                    <li>
+                      <Link>Create</Link>
+                    </li>
+                    <li>
+                      <Link>My Blogs</Link>
+                    </li>
+                    <li>
+                      <Link>Setting</Link>
+                    </li>
+                    <li>
+                      <Button onClick={handleLogout} variant="destructive">
+                        Logout
+                      </Button>
+                    </li>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
         </div>
       </div>
-      <hr className="border-t border-white my-6" />
+      <hr className="border-t border-white my-3" />
     </nav>
   );
 };
