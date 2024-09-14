@@ -5,6 +5,7 @@ import { FaInstagram } from "react-icons/fa6";
 const Footer = () => {
   return (
     <footer className="p-5 bottom-0 backdrop-blur-lg z-50 isDark shadow-[-20px]">
+      <hr className="border-t border-white my-6" />
       <div className="flex flex-col md:flex-row justify-between items-start mx-auto max-w-screen-xl px-6 md:px-16 lg:px-36 space-y-6 md:space-y-0">
         {/* About Us Section */}
         <div className="flex-1">

@@ -34,7 +34,7 @@ const Login = () => {
 
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
-      localStorage.setItem("userData", JSON.stringify(user));
+      localStorage.setItem("user", JSON.stringify(user));
 
       dispatch(addUser(user));
 

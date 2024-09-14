@@ -28,7 +28,7 @@ const Navbar = () => {
 
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      localStorage.removeItem("userData");
+      localStorage.removeItem("user");
 
       navigate("/");
     } catch (error) {
@@ -61,6 +61,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
+      <hr className="border-t border-white my-6" />
     </nav>
   );
 };
