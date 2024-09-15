@@ -25,7 +25,7 @@ const Browse = () => {
     <div className="scroll-smooth min-h-screen antialiased flex flex-col bg-[#09090b] text-[#fafafa]">
       <Navbar />
       {/* Main content stays centered */}
-      <main className="flex flex-grow justify-center items-center max-w-screen-lg mx-auto">
+      <main className="mt-10 mb-10 flex flex-grow justify-center items-center max-w-screen-lg mx-auto">
         {<Outlet />}
       </main>
       <Footer />

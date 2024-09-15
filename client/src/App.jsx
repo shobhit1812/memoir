@@ -3,6 +3,7 @@ import Login from "./components/Login";
 import Browse from "./components/Browse";
 import MyBlogs from "./components/MyBlogs";
 import Register from "./components/Register";
+import CreateBlog from "./components/CreateBlog";
 import DetailedBlog from "./components/DetailedBlog";
 import { createBrowserRouter } from "react-router-dom";
 
@@ -30,6 +31,10 @@ const App = createBrowserRouter([
       {
         path: "detailed-blog/:title/:id",
         element: <DetailedBlog />,
+      },
+      {
+        path: "create-blog",
+        element: <CreateBlog />,
       },
     ],
   },

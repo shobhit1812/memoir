@@ -40,16 +40,16 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="p-5 sticky top-0 bg-[#09090b] z-50 shadow-2xl">
+    <nav className="p-1 sticky top-0 bg-[#09090b] z-50">
       <div className="flex justify-between items-center max-w-screen-xl mx-auto">
         {/* Welcome message aligned to the left */}
-        <div className="text-lg font-semibold text-left text-slate-400">
+        <div className="text-2xl font-semibold text-left text-slate-400">
           <Link to={`/browse/${user?._id}`}> Welcome {user?.fullName}.</Link>
         </div>
 
         {/* Avatar on the right */}
         <div className="relative">
-          <NavigationMenu>
+          <NavigationMenu className="pt-2">
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="bg-[#09090b] text-[#fafafa]">
@@ -61,7 +61,9 @@ const Navbar = () => {
                 <NavigationMenuContent>
                   <ul className="grid w-[100px] gap-1 p-2 md:w-[100px] md:grid-cols-1 lg:w-[100px]">
                     <li>
-                      <Link>Create</Link>
+                      <Link to={`/browse/${user?._id}/create-blog`}>
+                        Create
+                      </Link>
                     </li>
                     <li>
                       <Link to={`/browse/${user?._id}/my-blogs`}>My Blogs</Link>
@@ -81,7 +83,7 @@ const Navbar = () => {
           </NavigationMenu>
         </div>
       </div>
-      <hr className="border-t border-white my-3" />
+      <hr className="border-t border-white" />
     </nav>
   );
 };
