@@ -1,10 +1,9 @@
-import Blogs from "./Blogs";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { addUser } from "@/utils/slices/userSlice";
+import { useNavigate, Outlet } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const Browse = () => {
   const user = useSelector((store) => store.user);
@@ -26,8 +25,8 @@ const Browse = () => {
     <div className="scroll-smooth min-h-screen antialiased flex flex-col bg-[#09090b] text-[#fafafa]">
       <Navbar />
       {/* Main content stays centered */}
-      <main className="flex-grow flex justify-center items-center">
-        <Blogs />
+      <main className="flex flex-grow justify-center items-center max-w-screen-lg mx-auto">
+        {<Outlet />}
       </main>
       <Footer />
     </div>

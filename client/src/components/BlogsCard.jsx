@@ -1,4 +1,7 @@
 /* eslint-disable react/prop-types */
+
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import {
   Card,
   CardContent,
@@ -8,15 +11,20 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-const BlogsCard = ({ title, description, owner, createdAt }) => {
+const BlogsCard = ({ title, description, owner, createdAt, _id }) => {
   const name = owner?.fullName;
   const date = new Date(createdAt).toISOString().split("T")[0];
+
+  const user = useSelector((store) => store?.user);
 
   return (
     <Card className="w-full h-full shadow-lg rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl">
       <CardHeader>
         <CardTitle className="cursor-pointer text-xl font-semibold">
-          {title.length > 20 ? `${title.substring(0, 20)}...` : title}
+          <Link to={`/browse/${user._id}/detailed-blog/${title}/${_id}`}>
+            {" "}
+            {title.length > 20 ? `${title.substring(0, 20)}...` : title}
+          </Link>
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -25,7 +33,10 @@ const BlogsCard = ({ title, description, owner, createdAt }) => {
             ? `${description.substring(0, 100)}...`
             : description}
           <span className="text-blue-500 ml-2 cursor-pointer">
-            {description.length > 100 && "Read more"}
+            <Link to={`/browse/${user._id}/detailed-blog/${title}/${_id}`}>
+              {" "}
+              {description.length > 100 && "Read more"}
+            </Link>
           </span>
         </CardDescription>
       </CardContent>

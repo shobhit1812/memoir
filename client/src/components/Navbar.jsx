@@ -1,6 +1,6 @@
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "@/utils/constants/server_url";
 import { removeUser } from "@/utils/slices/userSlice.js";
@@ -19,11 +19,13 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
+    const token = localStorage.getItem("accessToken");
+
     try {
       await axios.post(`${BASE_URL}/users/logout`, null, {
         withCredentials: true,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -41,8 +43,8 @@ const Navbar = () => {
     <nav className="p-5 sticky top-0 bg-[#09090b] z-50 shadow-2xl">
       <div className="flex justify-between items-center max-w-screen-xl mx-auto">
         {/* Welcome message aligned to the left */}
-        <div className="text-lg font-semibold text-left">
-          Welcome {user?.fullName}.
+        <div className="text-lg font-semibold text-left text-slate-400">
+          <Link to={`/browse/${user?._id}`}> Welcome {user?.fullName}.</Link>
         </div>
 
         {/* Avatar on the right */}
@@ -62,7 +64,7 @@ const Navbar = () => {
                       <Link>Create</Link>
                     </li>
                     <li>
-                      <Link>My Blogs</Link>
+                      <Link to={`/browse/${user?._id}/my-blogs`}>My Blogs</Link>
                     </li>
                     <li>
                       <Link>Setting</Link>

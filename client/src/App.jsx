@@ -1,7 +1,10 @@
-import { createBrowserRouter } from "react-router-dom";
+import Blogs from "./components/Blogs";
 import Login from "./components/Login";
-import Register from "./components/Register";
 import Browse from "./components/Browse";
+import MyBlogs from "./components/MyBlogs";
+import Register from "./components/Register";
+import DetailedBlog from "./components/DetailedBlog";
+import { createBrowserRouter } from "react-router-dom";
 
 const App = createBrowserRouter([
   {
@@ -15,6 +18,20 @@ const App = createBrowserRouter([
   {
     path: "/browse/:id",
     element: <Browse />,
+    children: [
+      {
+        path: "",
+        element: <Blogs />,
+      },
+      {
+        path: "my-blogs",
+        element: <MyBlogs />,
+      },
+      {
+        path: "detailed-blog/:title/:id",
+        element: <DetailedBlog />,
+      },
+    ],
   },
 ]);
 

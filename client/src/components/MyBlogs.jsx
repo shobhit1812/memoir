@@ -3,14 +3,14 @@ import BlogsCard from "./BlogsCard";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "@/utils/constants/server_url";
 
-const Blogs = () => {
+const MyBlogs = () => {
   const [blogs, setBlogs] = useState([]);
 
-  const getAllBlogs = async () => {
+  const getMyBlogs = async () => {
     const token = localStorage.getItem("accessToken");
 
     try {
-      const blogs = await axios.get(`${BASE_URL}/blogs/get-all-blogs`, {
+      const blogs = await axios.get(`${BASE_URL}/blogs/get-my-blogs`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -23,7 +23,7 @@ const Blogs = () => {
   };
 
   useEffect(() => {
-    getAllBlogs();
+    getMyBlogs();
   }, []);
 
   return (
@@ -35,4 +35,4 @@ const Blogs = () => {
   );
 };
 
-export default Blogs;
+export default MyBlogs;
