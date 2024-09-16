@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { ThreeDots } from "react-loader-spinner";
 import { useParams, Link } from "react-router-dom";
 import { BASE_URL } from "@/utils/constants/server_url";
 
@@ -13,6 +14,7 @@ const DetailedBlog = () => {
   const user = useSelector((store) => store?.user);
   const token = localStorage.getItem("accessToken");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const getBlogDetails = async () => {
     try {
@@ -28,6 +30,7 @@ const DetailedBlog = () => {
   };
 
   const deleteBlogById = async () => {
+    setLoading(true);
     try {
       await axios.delete(`${BASE_URL}/blogs/delete-blog/${id}`, {
         headers: {
@@ -36,7 +39,9 @@ const DetailedBlog = () => {
       });
       navigate(`/browse/${user?._id}/my-blogs`);
     } catch (error) {
-      console.error("Error while deleting blog.", error);
+      console.error("Error while deleting blog.", error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -60,8 +65,18 @@ const DetailedBlog = () => {
               Edit
             </Link>
           </Button>
-          <Button variant="destructive" onClick={() => deleteBlogById()}>
-            Delete
+          <Button
+            variant="destructive"
+            onClick={() => deleteBlogById()}
+            disabled={loading}
+          >
+            {loading ? (
+              <div className="flex justify-center items-center">
+                <ThreeDots color="#fafafa" height={24} width={24} />
+              </div>
+            ) : (
+              "Delete"
+            )}
           </Button>
         </div>
       )}

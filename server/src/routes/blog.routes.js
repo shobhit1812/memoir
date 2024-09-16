@@ -3,7 +3,7 @@ import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 import {
   createBlog,
-  editBlog,
+  updateBlog,
   deleteBlog,
   getAllBlogs,
   getMyBlogs,
@@ -23,7 +23,7 @@ router.route("/create-blog").post(
   createBlog
 );
 
-router.route("/edit-blog/:blogId").put(
+router.route("/update-blog/:blogId").put(
   verifyJWT,
   upload.fields([
     {
@@ -31,7 +31,7 @@ router.route("/edit-blog/:blogId").put(
       maxCount: 1,
     },
   ]),
-  editBlog
+  updateBlog
 );
 
 router.route("/delete-blog/:blogId").delete(verifyJWT, deleteBlog);

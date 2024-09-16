@@ -49,7 +49,7 @@ const createBlog = asyncHandler(async (req, res) => {
     .json(new ApiResponse(201, blog, "Blog created successfully"));
 });
 
-const editBlog = asyncHandler(async (req, res) => {
+const updateBlog = asyncHandler(async (req, res) => {
   const { blogId } = req.params;
   const { title, description } = req.body;
 
@@ -198,7 +198,7 @@ const getBlogById = asyncHandler(async (req, res) => {
 
 export {
   createBlog,
-  editBlog,
+  updateBlog,
   deleteBlog,
   getAllBlogs,
   getMyBlogs,
