@@ -41,7 +41,7 @@ const Navbar = () => {
 
   return (
     <nav className="p-1 sticky top-0 bg-[#09090b] z-50">
-      <div className=" flex justify-between items-center max-w-screen-xl mx-auto">
+      <div className="flex justify-between items-center max-w-screen-xl mx-auto">
         {/* Welcome message aligned to the left */}
         <div className="text-2xl font-semibold text-left">
           <Link to={`/browse/${user?._id}`}> Welcome {user?.fullName}.</Link>
