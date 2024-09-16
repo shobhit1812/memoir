@@ -3,6 +3,7 @@ import Login from "./components/Login";
 import Browse from "./components/Browse";
 import MyBlogs from "./components/MyBlogs";
 import Register from "./components/Register";
+import EditBlog from "./components/EditBlog";
 import CreateBlog from "./components/CreateBlog";
 import DetailedBlog from "./components/DetailedBlog";
 import { createBrowserRouter } from "react-router-dom";
@@ -35,6 +36,10 @@ const App = createBrowserRouter([
       {
         path: "create-blog",
         element: <CreateBlog />,
+      },
+      {
+        path: "edit-blog/:title/:id",
+        element: <EditBlog />,
       },
     ],
   },

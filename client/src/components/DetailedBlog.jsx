@@ -2,9 +2,9 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useParams, Link } from "react-router-dom";
 import { BASE_URL } from "@/utils/constants/server_url";
 
 const DetailedBlog = () => {
@@ -55,7 +55,11 @@ const DetailedBlog = () => {
     <div className="max-w-6xl mx-auto px-4 py-10">
       {owner?.fullName === user?.fullName && (
         <div className="flex justify-between pb-5">
-          <Button variant="secondary">Edit</Button>
+          <Button variant="secondary">
+            <Link to={`/browse/${user?._id}/edit-blog/${title}/${id}`}>
+              Edit
+            </Link>
+          </Button>
           <Button variant="destructive" onClick={() => deleteBlogById()}>
             Delete
           </Button>
