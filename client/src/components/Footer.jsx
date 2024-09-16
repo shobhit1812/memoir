@@ -7,12 +7,10 @@ const Footer = () => {
     <>
       <hr className="border-t border-white" />
       <footer className="p-5 backdrop-blur-lg bg-[#09090b] text-[#fafafa] z-50">
-        <div className="flex flex-col md:flex-row justify-between items-start mx-auto max-w-screen-xl px-6 md:px-16 lg:px-36 space-y-6 md:space-y-0">
+        <div className="flex flex-col md:flex-row justify-between items-start mx-auto max-w-screen-2xl px-6 md:px-16 lg:px-36 space-y-6 md:space-y-0">
           {/* About Us Section */}
           <div className="flex-1">
-            <h3 className="text-lg font-semibold mb-2 text-slate-400">
-              About Us
-            </h3>
+            <h3 className="text-xl font-bold mb-2">About Us</h3>
             <p className="text-sm">
               {`Memoir, a platform designed for those who love to read, write, and explore ideas. Whether you're diving into thought-provoking stories or expressing your own through writing, Memoir offers a space where curiosity meets creativity.`}
             </p>
@@ -20,9 +18,7 @@ const Footer = () => {
 
           {/* Follow Us Section */}
           <div className="flex-1 md:ml-16">
-            <h3 className="text-lg font-semibold mb-2 text-slate-400">
-              Follow Us
-            </h3>
+            <h3 className="text-xl font-bold mb-2">Follow Us</h3>
             <div className="flex space-x-4">
               <a
                 href="https://github.com/Shobhit1812"
@@ -53,9 +49,7 @@ const Footer = () => {
 
           {/* Contact Us Section */}
           <div className="flex-1">
-            <h3 className="text-lg font-semibold mb-2 text-slate-400">
-              Contact Us
-            </h3>
+            <h3 className="text-xl font-bold mb-2">Contact Us</h3>
             <p className="text-sm">
               Email: contact@memoir.com <br />
               Phone: +123 456 7890
