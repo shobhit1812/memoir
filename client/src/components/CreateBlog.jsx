@@ -10,11 +10,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { BASE_URL } from "@/utils/constants/server_url";
 
 const CreateBlog = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [coverImage, setCoverImage] = useState(null);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+
   const user = useSelector((store) => store.user);
 
   const handleFileChange = (e) => {
@@ -25,14 +26,14 @@ const CreateBlog = () => {
     e.preventDefault();
     setLoading(true);
 
-    const token = localStorage.getItem("accessToken");
-
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
     if (coverImage) {
       formData.append("coverImage", coverImage);
     }
+
+    const token = localStorage.getItem("accessToken");
 
     try {
       await axios.post(`${BASE_URL}/blogs/create-blog`, formData, {
@@ -48,8 +49,9 @@ const CreateBlog = () => {
       setLoading(false);
     }
   };
+
   return (
-    <div className="">
+    <div>
       <h1 className="text-3xl font-bold text-center mb-6">Create a New Blog</h1>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div className="mb-6">
@@ -59,7 +61,7 @@ const CreateBlog = () => {
           <Input
             id="title"
             type="text"
-            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300 text-[#fafafa] bg-[#09090b] bg-opacity-70 focus:bg-[#09090b] transition-colors"
+            className="w-full text-base px-4 py-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300 bg-[#fafafa] text-[#09090b] bg-opacity-80 focus:bg-[#fafafa] transition-colors"
             placeholder="Enter blog title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -72,12 +74,12 @@ const CreateBlog = () => {
             htmlFor="coverImage"
             className="text-xl font-semibold block mb-2"
           >
-            Cover Image
+            Cover Image (Optional)
           </Label>
           <Input
             id="coverImage"
             type="file"
-            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300 bg-[#09090b] bg-opacity-10 focus:bg-[#09090b] transition-colors"
+            className="w-full text-base px-4 py-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300 bg-[#fafafa] text-[#09090b] bg-opacity-80 focus:bg-[#fafafa] transition-colors"
             accept="image/*"
             onChange={handleFileChange}
           />
@@ -92,7 +94,7 @@ const CreateBlog = () => {
           </Label>
           <Textarea
             id="description"
-            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300 text-[#fafafa] bg-[#09090b] bg-opacity-10 focus:bg-[#09090b] transition-colors"
+            className="w-full text-base px-4 py-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300 bg-[#fafafa] text-[#09090b] bg-opacity-80 focus:bg-[#fafafa] transition-colors"
             placeholder="Enter blog description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}

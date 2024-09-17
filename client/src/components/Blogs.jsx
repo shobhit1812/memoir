@@ -30,13 +30,7 @@ const Blogs = () => {
   return (
     <div className="p-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {blogs.length === 0 ? (
-        <>
-          {Array(12)
-            ?.fill(0)
-            ?.map((_, index) => (
-              <Shimmer key={index} />
-            ))}
-        </>
+        <Shimmer numberOfBlogs={9} />
       ) : (
         <>
           {blogs.map((blog) => (

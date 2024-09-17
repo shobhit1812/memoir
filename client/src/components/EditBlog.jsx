@@ -9,6 +9,7 @@ import { ThreeDots } from "react-loader-spinner";
 import { Textarea } from "@/components/ui/textarea";
 import { BASE_URL } from "@/utils/constants/server_url";
 import { useParams, useNavigate } from "react-router-dom";
+import { AiOutlineCloseCircle } from "react-icons/ai"; // Cross icon
 
 const EditBlog = () => {
   const { id } = useParams();
@@ -17,6 +18,7 @@ const EditBlog = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [coverImage, setCoverImage] = useState("");
+  const [coverImageFile, setCoverImageFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const user = useSelector((store) => store?.user);
 
@@ -44,8 +46,9 @@ const EditBlog = () => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
-    if (coverImage && coverImage instanceof File) {
-      formData.append("coverImage", coverImage);
+
+    if (coverImageFile) {
+      formData.append("coverImage", coverImageFile);
     }
 
     try {
@@ -64,7 +67,16 @@ const EditBlog = () => {
   };
 
   const handleFileChange = (e) => {
-    setCoverImage(e.target.files[0]);
+    const file = e.target.files[0];
+    if (file) {
+      setCoverImage(URL.createObjectURL(file));
+      setCoverImageFile(file);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setCoverImage("");
+    setCoverImageFile(null);
   };
 
   useEffect(() => {
@@ -84,7 +96,7 @@ const EditBlog = () => {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300 text-[#fafafa] bg-[#09090b] bg-opacity-70 focus:bg-[#09090b] transition-colors"
+            className="w-full text-base px-4 py-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300 bg-[#fafafa] text-[#09090b] bg-opacity-80 focus:bg-[#fafafa] transition-colors"
             placeholder="Enter blog title"
             required
           />
@@ -97,10 +109,26 @@ const EditBlog = () => {
           >
             Cover Image
           </Label>
+          {coverImage && (
+            <div className="relative">
+              <img
+                src={coverImage}
+                alt="coverImage"
+                className="w-96 h-96 object-contain pb-3 rounded"
+              />
+              <button
+                type="button"
+                className="absolute top-0 right-0 p-1 text-red-500"
+                onClick={handleRemoveImage}
+              >
+                <AiOutlineCloseCircle size={24} />
+              </button>
+            </div>
+          )}
           <Input
             id="coverImage"
             type="file"
-            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300 bg-[#09090b] bg-opacity-10 focus:bg-[#09090b] transition-colors"
+            className="w-full text-base px-4 py-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300 bg-[#fafafa] text-[#09090b] bg-opacity-80 focus:bg-[#fafafa] transition-colors"
             accept="image/*"
             onChange={handleFileChange}
           />
@@ -117,7 +145,7 @@ const EditBlog = () => {
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300 text-[#fafafa] bg-[#09090b] bg-opacity-10 focus:bg-[#09090b] transition-colors"
+            className="w-full text-base px-4 py-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300 bg-[#fafafa] text-[#09090b] bg-opacity-80 focus:bg-[#fafafa] transition-colors"
             placeholder="Enter blog description"
             rows="6"
             required

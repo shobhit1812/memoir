@@ -1,11 +1,15 @@
 import axios from "axios";
+import Shimmer from "./Shimmer";
 import BlogsCard from "./BlogsCard";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import { BASE_URL } from "@/utils/constants/server_url";
 
 const MyBlogs = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const user = useSelector((store) => store.user);
 
   const getMyBlogs = async () => {
     const token = localStorage.getItem("accessToken");
@@ -31,8 +35,8 @@ const MyBlogs = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center">
-        <p>Loading blogs...</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Shimmer numberOfBlogs={3} />
       </div>
     );
   }
@@ -46,7 +50,11 @@ const MyBlogs = () => {
           <p className="text-xl font-semibold">
             {"You haven't written any blogs yet"}
           </p>
-          <p className="text-gray-500">Start writing your first blog now!</p>
+          <Link to={`/browse/${user?._id}/create-blog`}>
+            <p className="text-blue-600 cursor-pointer">
+              Start writing your first blog now!
+            </p>
+          </Link>
         </div>
       )}
     </div>
