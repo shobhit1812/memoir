@@ -18,7 +18,7 @@ const BlogsCard = ({ title, description, owner, createdAt, _id }) => {
   const user = useSelector((store) => store?.user);
 
   return (
-    <Card className="w-full h-full shadow-lg rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+    <Card className="w-full h-full bg-[#09090b] text-[#fafafa] rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105">
       <CardHeader>
         <CardTitle className="cursor-pointer text-xl font-semibold">
           <Link to={`/browse/${user._id}/detailed-blog/${title}/${_id}`}>

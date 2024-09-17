@@ -103,7 +103,7 @@ const Register = () => {
               />
               <button
                 type="button"
-                className="absolute right-2 top-1/2 transform -translate-y-1/2  text-[#09090b]"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-[#09090b]"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? <BiHide size={20} /> : <PiEye size={20} />}
@@ -120,7 +120,7 @@ const Register = () => {
               type="file"
               id="avatar"
               onChange={handleAvatarChange}
-              className="w-full px-4 py-2 border rounded-md text-gray-500"
+              className="w-full px-2 py-2 border rounded-md text-gray-500"
               accept="image/*"
             />
           </div>

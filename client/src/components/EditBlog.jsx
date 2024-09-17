@@ -72,7 +72,7 @@ const EditBlog = () => {
   }, []);
 
   return (
-    <div className="">
+    <div>
       <h1 className="text-3xl font-bold text-center mb-6">Edit Blog</h1>
       <form onSubmit={updateBlog} encType="multipart/form-data">
         <div className="mb-6">
