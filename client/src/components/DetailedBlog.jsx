@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ThreeDots } from "react-loader-spinner";
+import { ProgressBar, ThreeDots } from "react-loader-spinner";
 import { useParams, Link } from "react-router-dom";
 import { BASE_URL } from "@/utils/constants/server_url";
 
@@ -25,7 +25,7 @@ const DetailedBlog = () => {
       });
       setBlog(response.data.data);
     } catch (error) {
-      console.error("Error fetching blog details:", error);
+      console.error("Error while fetching blog details:", error.message);
     }
   };
 
@@ -39,7 +39,7 @@ const DetailedBlog = () => {
       });
       navigate(`/browse/${user?._id}/my-blogs`);
     } catch (error) {
-      console.error("Error while deleting blog.", error.message);
+      console.error("Error while deleting blog:", error.message);
     } finally {
       setLoading(false);
     }
@@ -50,7 +50,17 @@ const DetailedBlog = () => {
   }, []);
 
   if (!blog) {
-    return <div>Loading...</div>;
+    return (
+      <div className="max-w-6xl mx-auto px-4 py-10">
+        <ProgressBar
+          visible={true}
+          height="160"
+          width="160"
+          color="#4fa94d"
+          ariaLabel="progress-bar-loading"
+        />
+      </div>
+    );
   }
 
   const { coverImage, title, description, owner, createdAt } = blog;

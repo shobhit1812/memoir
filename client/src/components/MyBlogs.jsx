@@ -23,7 +23,7 @@ const MyBlogs = () => {
       const response = blogs.data.data;
       setBlogs(response);
     } catch (error) {
-      console.error("Error fetching blogs:", error);
+      console.error("Error while fetching blogs:", error.message);
     } finally {
       setLoading(false);
     }

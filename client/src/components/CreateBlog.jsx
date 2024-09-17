@@ -44,7 +44,7 @@ const CreateBlog = () => {
       });
       navigate(`/browse/${user?._id}/my-blogs`);
     } catch (error) {
-      console.error("Error creating blog:", error);
+      console.error("Error creating blog:", error.message);
     } finally {
       setLoading(false);
     }

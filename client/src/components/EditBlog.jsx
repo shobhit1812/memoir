@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -35,7 +34,7 @@ const EditBlog = () => {
       setDescription(description);
       setCoverImage(coverImage);
     } catch (error) {
-      console.error("Error fetching blog details:", error);
+      console.error("Error while fetching blog details:", error.message);
     }
   };
 
