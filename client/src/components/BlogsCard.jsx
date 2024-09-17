@@ -33,7 +33,7 @@ const BlogsCard = ({ title, description, owner, createdAt, _id }) => {
             ? `${description.substring(0, 100)}...`
             : description}
           <span className="text-blue-500 ml-2 cursor-pointer">
-            <Link to={`/browse/${user._id}/detailed-blog/${title}/${_id}`}>
+            <Link to={`/browse/${user?._id}/detailed-blog/${title}/${_id}`}>
               {" "}
               {description.length > 100 && "Read more"}
             </Link>
