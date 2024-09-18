@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Button } from "@/components/ui/button";
+import { ThreeDots } from "react-loader-spinner";
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,6 +20,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     const token = localStorage.getItem("accessToken");
+    setLoading(true);
 
     try {
       await axios.post(`${BASE_URL}/users/logout`, null, {
@@ -34,6 +37,8 @@ const Navbar = () => {
       navigate("/");
     } catch (error) {
       console.error("Logout failed:", error.response?.data || error?.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -65,12 +70,9 @@ const Navbar = () => {
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
 
-          {/* If user click */}
+          {/* If user clicks */}
           {isMenuOpen && (
-            <div
-              className="absolute right-0 mt-3 w-32 rounded-lg bg-gray-700 shadow-lg
-               z-10"
-            >
+            <div className="absolute right-0 mt-3 w-32 rounded-lg bg-gray-700 shadow-lg z-10">
               <ul className="grid w-[130px] gap-2 p-2 md:w-[130px] md:grid-cols-1 lg:w-[130px] text-lg">
                 <li className="hover:underline">
                   <Link to={`/browse/${user?._id}/create-blog`}>
@@ -86,8 +88,20 @@ const Navbar = () => {
                     className="w-full text-center text-lg"
                     onClick={handleLogout}
                     variant="destructive"
+                    disabled={loading} // Disable button during loading
                   >
-                    Logout
+                    {loading ? (
+                      <div className="flex justify-center items-center">
+                        <ThreeDots
+                          height="24"
+                          width="24"
+                          color="#ffffff"
+                          ariaLabel="loading"
+                        />
+                      </div>
+                    ) : (
+                      "Logout"
+                    )}
                   </Button>
                 </li>
               </ul>
