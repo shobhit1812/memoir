@@ -7,19 +7,29 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ThreeDots } from "react-loader-spinner";
 import { Textarea } from "@/components/ui/textarea";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import { BASE_URL } from "@/utils/constants/server_url";
-
 const CreateBlog = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [coverImage, setCoverImage] = useState(null);
+  const [coverImagePreview, setCoverImagePreview] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const user = useSelector((store) => store.user);
 
   const handleFileChange = (e) => {
-    setCoverImage(e.target.files[0]);
+    const file = e.target.files[0];
+    if (file) {
+      setCoverImage(file);
+      setCoverImagePreview(URL.createObjectURL(file));
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setCoverImage(null);
+    setCoverImagePreview(null);
   };
 
   const handleSubmit = async (e) => {
@@ -76,6 +86,22 @@ const CreateBlog = () => {
           >
             Cover Image (Optional)
           </Label>
+          {coverImagePreview && (
+            <div className="relative mb-3">
+              <img
+                src={coverImagePreview}
+                alt="Cover Preview"
+                className="w-96 h-96 object-contain pb-3 rounded"
+              />
+              <button
+                type="button"
+                className="absolute top-0 right-0 p-1 text-red-500"
+                onClick={handleRemoveImage}
+              >
+                <AiOutlineCloseCircle size={24} />
+              </button>
+            </div>
+          )}
           <Input
             id="coverImage"
             type="file"
