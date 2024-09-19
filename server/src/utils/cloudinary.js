@@ -16,7 +16,6 @@ const uploadOnCloudinary = async (localFilePath, folder_name) => {
       folder: `memoir/${folder_name}`,
     });
 
-    fs.unlinkSync(localFilePath);
     return response;
   } catch (error) {
     fs.unlinkSync(localFilePath);
