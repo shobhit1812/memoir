@@ -1,13 +1,14 @@
 import axios from "axios";
-import { useState } from "react";
 import { PiEye } from "react-icons/pi";
 import { BiHide } from "react-icons/bi";
+import { useState, useEffect } from "react";
 import { Label } from "@radix-ui/react-label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ThreeDots } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "@/utils/constants/server_url";
+import { getAllUsers } from "@/utils/helper/getAllUsers";
 
 const Register = () => {
   const [fullName, setFullName] = useState("");
@@ -47,6 +48,10 @@ const Register = () => {
     const file = e.target.files[0];
     setAvatar(file);
   };
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
 
   return (
     <div className="flex flex-col lg:flex-row h-screen bg-[#09090b] text-[#fafafa]">

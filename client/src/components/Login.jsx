@@ -1,14 +1,15 @@
 import axios from "axios";
-import { useState } from "react";
 import { PiEye } from "react-icons/pi";
 import { BiHide } from "react-icons/bi";
 import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 import { Rings } from "react-loader-spinner";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { addUser } from "@/utils/slices/userSlice.js";
+import { getAllUsers } from "@/utils/helper/getAllUsers";
 import { BASE_URL } from "@/utils/constants/server_url.js";
 
 const Login = () => {
@@ -45,6 +46,10 @@ const Login = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
 
   return (
     <div className="flex flex-col lg:flex-row h-screen bg-[#09090b] text-[#fafafa]">
