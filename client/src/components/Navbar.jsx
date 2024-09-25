@@ -63,12 +63,12 @@ const Navbar = () => {
     <nav className="p-2 sticky top-0 backdrop-blur shadow-sm shadow-white z-50">
       <div className="flex justify-between items-center max-w-screen-xl mx-auto">
         {/* Welcome message aligned to the left */}
-        <div className="text-2xl font-semibold text-left">
-          <Link to={`/browse/${user?._id}`}> Welcome {user?.fullName}.</Link>
+        <div className="text-2xl font-semibold text-left pl-4">
+          <Link to={`/browse/${user?._id}`}>Memoir</Link>
         </div>
 
         {/* Avatar on the right */}
-        <div className="relative" ref={userIconRef}>
+        <div className="relative pr-3" ref={userIconRef}>
           <Avatar onClick={toggleMenu} className="cursor-pointer">
             <AvatarImage src={user?.avatar} alt="avatar" />
             <AvatarFallback>CN</AvatarFallback>
