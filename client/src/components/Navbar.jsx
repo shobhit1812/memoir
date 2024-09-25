@@ -42,10 +42,6 @@ const Navbar = () => {
     }
   };
 
-  const handleSetting = () => {
-    alert("***** Feature is in development mode *****");
-  };
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (userIconRef.current && !userIconRef.current.contains(event.target)) {
@@ -86,11 +82,8 @@ const Navbar = () => {
                 <li className="hover:underline">
                   <Link to={`/browse/${user?._id}/my-blogs`}>My Blogs</Link>
                 </li>
-                <li
-                  className="hover:underline cursor-pointer"
-                  onClick={() => handleSetting()}
-                >
-                  Setting
+                <li className="hover:underline cursor-pointer">
+                  <Link to={`/browse/${user?._id}/setting`}>Setting</Link>
                 </li>
                 <li>
                   <Button

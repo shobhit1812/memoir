@@ -2,6 +2,7 @@ import Blogs from "./components/Blogs";
 import Login from "./components/Login";
 import Browse from "./components/Browse";
 import MyBlogs from "./components/MyBlogs";
+import Setting from "./components/Setting";
 import Register from "./components/Register";
 import EditBlog from "./components/EditBlog";
 import CreateBlog from "./components/CreateBlog";
@@ -40,6 +41,10 @@ const App = createBrowserRouter([
       {
         path: "edit-blog/:title/:id",
         element: <EditBlog />,
+      },
+      {
+        path: "setting",
+        element: <Setting />,
       },
     ],
   },
