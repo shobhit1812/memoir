@@ -3,10 +3,10 @@ import { PiEye } from "react-icons/pi";
 import { BiHide } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { Rings } from "react-loader-spinner";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { ThreeDots } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 import { addUser } from "@/utils/slices/userSlice.js";
 import { getAllUsers } from "@/utils/helper/getAllUsers";
@@ -126,7 +126,7 @@ const Login = () => {
           >
             {loading ? (
               <div className="flex justify-center items-center">
-                <Rings color="#09090b" height={24} width={24} />
+                <ThreeDots color="#09090b" height={24} width={24} />
               </div>
             ) : (
               "Login"
