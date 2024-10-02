@@ -15,6 +15,7 @@ import { BASE_URL } from "@/utils/constants/server_url.js";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -41,7 +42,10 @@ const Login = () => {
 
       navigate(`/browse/${user?._id}`);
     } catch (error) {
-      console.error(error.response?.data || error?.message);
+      // console.error(error?.response?.data || error?.message);
+      const errorMessage = error?.response?.data;
+      const match = errorMessage.match(/Error: (.*?)<br>/); //  extract the error message in an array
+      setErrorMessage(match[1]);
     } finally {
       setLoading(false);
     }
@@ -71,6 +75,12 @@ const Login = () => {
         <form className="w-full max-w-md" onSubmit={handleLogin}>
           {/* Email Field */}
           <div className="mb-4">
+            {errorMessage && (
+              <h1 className="p-1 mb-4 font-semibold border border-white bg-red-500 items-center text-center rounded-md">
+                {errorMessage}
+              </h1>
+            )}
+
             <Label
               className="block text-sm lg:text-base font-bold mb-2"
               htmlFor="email"
