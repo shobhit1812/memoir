@@ -17,6 +17,7 @@ const Register = () => {
   const [avatar, setAvatar] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -38,7 +39,11 @@ const Register = () => {
       });
       navigate("/");
     } catch (error) {
-      console.error(error.response?.data || error?.message);
+      const errorMessage = error?.response?.data;
+      const match = errorMessage.match(/Error: (.*?)<br>/);
+      setErrorMessage(
+        match ? match[1] : "An unexpected error occurred. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -58,6 +63,12 @@ const Register = () => {
       <div className="lg:w-1/2 flex flex-col justify-center items-center p-8">
         <h1 className="text-3xl font-bold mb-6">Register</h1>
         <form className="w-full max-w-md" onSubmit={handleRegister}>
+          {errorMessage && (
+            <h1 className="p-1 mb-4 font-semibold border border-white bg-red-500 items-center text-center rounded-md">
+              {errorMessage}
+            </h1>
+          )}
+
           {/* Full Name Field */}
           <div className="mb-4">
             <Label className="block text-sm font-bold mb-2" htmlFor="fullName">
