@@ -45,7 +45,9 @@ const Login = () => {
       // console.error(error?.response?.data || error?.message);
       const errorMessage = error?.response?.data;
       const match = errorMessage.match(/Error: (.*?)<br>/); //  extract the error message in an array
-      setErrorMessage(match[1]);
+      setErrorMessage(
+        match ? match[1] : "An unexpected error occurred. Please try again."
+      );
     } finally {
       setLoading(false);
     }
