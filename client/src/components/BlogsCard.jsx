@@ -21,7 +21,7 @@ const BlogsCard = ({ title, description, owner, createdAt, _id }) => {
     <Card className="w-full h-full bg-[#09090b] text-[#fafafa] rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105">
       <CardHeader>
         <CardTitle className="cursor-pointer text-xl font-semibold">
-          <Link to={`/browse/${user._id}/detailed-blog/${title}/${_id}`}>
+          <Link to={`/browse/${user?._id}/detailed-blog/${title}/${_id}`}>
             {" "}
             {title.length > 20 ? `${title.substring(0, 20)}...` : title}
           </Link>

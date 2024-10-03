@@ -6,14 +6,14 @@ import { useNavigate, Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 const Browse = () => {
-  const user = useSelector((store) => store.user);
+  const user = useSelector((store) => store?.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!user?._id) {
       const storedUser = JSON.parse(localStorage.getItem("user"));
-      if (storedUser && storedUser._id) {
+      if (storedUser && storedUser?._id) {
         dispatch(addUser(storedUser));
       } else {
         navigate("/register");

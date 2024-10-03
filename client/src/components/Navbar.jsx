@@ -11,7 +11,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const user = useSelector((store) => store.user);
+  const user = useSelector((store) => store?.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userIconRef = useRef(null);

@@ -25,7 +25,7 @@ const DetailedBlog = () => {
       });
       setBlog(response.data.data);
     } catch (error) {
-      console.error("Error while fetching blog details:", error.message);
+      console.error("Error while fetching blog details:", error?.message);
     }
   };
 
@@ -39,7 +39,7 @@ const DetailedBlog = () => {
       });
       navigate(`/browse/${user?._id}/my-blogs`);
     } catch (error) {
-      console.error("Error while deleting blog:", error.message);
+      console.error("Error while deleting blog:", error?.message);
     } finally {
       setLoading(false);
     }

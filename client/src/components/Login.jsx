@@ -97,6 +97,7 @@ const Login = () => {
               placeholder="Enter your email"
               className="w-full px-4 py-2 border rounded-md text-[#09090b]"
               required
+              autoComplete="email"
             />
           </div>
 
