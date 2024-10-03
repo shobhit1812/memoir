@@ -44,7 +44,7 @@ const Login = () => {
     } catch (error) {
       // console.error(error?.response?.data || error?.message);
       const errorMessage = error?.response?.data;
-      const match = errorMessage.match(/Error: (.*?)<br>/); //  extract the error message in an array
+      const match = await errorMessage.match(/Error: (.*?)<br>/); //  extract the error message in an array
       setErrorMessage(
         match ? match[1] : "An unexpected error occurred. Please try again."
       );
@@ -55,6 +55,10 @@ const Login = () => {
 
   useEffect(() => {
     getAllUsers();
+    console.log(
+      "%cWelcome to Memoir",
+      "color: yellow; font-size: 24px; font-weight: bold; font-style: italic; text-shadow: 2px 2px 5px rgba(0,0,0,0.3);"
+    );
   }, []);
 
   return (
