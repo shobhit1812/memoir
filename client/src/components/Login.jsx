@@ -42,9 +42,9 @@ const Login = () => {
 
       navigate(`/browse/${user?._id}`);
     } catch (error) {
-      // console.error(error?.response?.data || error?.message);
+      console.error(error || error?.response?.data || error?.message);
       const errorMessage = error?.response?.data;
-      const match = await errorMessage.match(/Error: (.*?)<br>/); //  extract the error message in an array
+      const match = errorMessage.match(/Error: (.*?)<br>/); //  extract the error message in an array
       setErrorMessage(
         match ? match[1] : "An unexpected error occurred. Please try again."
       );
