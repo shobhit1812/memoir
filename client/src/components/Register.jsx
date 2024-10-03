@@ -40,6 +40,7 @@ const Register = () => {
       navigate("/");
     } catch (error) {
       const errorMessage = error?.response?.data;
+      console.log(errorMessage);
       const match = errorMessage.match(/Error: (.*?)<br>/);
       setErrorMessage(
         match ? match[1] : "An unexpected error occurred. Please try again."
