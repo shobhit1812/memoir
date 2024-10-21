@@ -2,6 +2,7 @@ import axios from "axios";
 import Shimmer from "./Shimmer";
 import BlogsCard from "./BlogsCard";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { BASE_URL } from "@/utils/constants/server_url";
 
@@ -9,10 +10,16 @@ const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [visiblePages, setVisiblePages] = useState([1, 2, 3]);
+  const navigate = useNavigate();
   const cardsPerPage = 9;
 
   const getAllBlogs = async () => {
     const token = localStorage.getItem("accessToken");
+
+    if (!token) {
+      navigate("/");
+      return;
+    }
 
     try {
       const blogs = await axios.get(`${BASE_URL}/blogs/get-all-blogs`, {
@@ -23,7 +30,14 @@ const Blogs = () => {
       const response = blogs.data.data;
       setBlogs(response);
     } catch (error) {
-      console.error("Error fetching blogs:", error.message);
+      if (error.response && error.response.status === 401) {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("user");
+        navigate("/");
+      } else {
+        console.error("Error fetching blogs:", error.message);
+      }
     }
   };
 
