@@ -2,6 +2,7 @@ import axios from "axios";
 import Shimmer from "./Shimmer";
 import BlogsCard from "./BlogsCard";
 import { useEffect, useState } from "react";
+import useOnline from "../utils/hook/useOnline.js";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { BASE_URL } from "@/utils/constants/server_url";
@@ -12,6 +13,7 @@ const Blogs = () => {
   const [visiblePages, setVisiblePages] = useState([1, 2, 3]);
   const navigate = useNavigate();
   const cardsPerPage = 9;
+  const isOnline = useOnline();
 
   const getAllBlogs = async () => {
     const token = localStorage.getItem("accessToken");
@@ -81,6 +83,13 @@ const Blogs = () => {
     setCurrentPage(page);
     updateVisiblePages(page);
   };
+
+  if (!isOnline)
+    return (
+      <h1 className="flex p-3 justify-center text-4xl">
+        🔴 Offline, Please check your internet
+      </h1>
+    );
 
   return (
     <div>
