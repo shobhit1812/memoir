@@ -6,9 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ThreeDots } from "react-loader-spinner";
 import { Textarea } from "@/components/ui/textarea";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import { BASE_URL } from "@/utils/constants/server_url";
 import { useParams, useNavigate } from "react-router-dom";
-import { AiOutlineCloseCircle } from "react-icons/ai"; // Cross icon
 
 const EditBlog = () => {
   const { id } = useParams();

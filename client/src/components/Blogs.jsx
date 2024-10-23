@@ -2,9 +2,9 @@ import axios from "axios";
 import Shimmer from "./Shimmer";
 import BlogsCard from "./BlogsCard";
 import { useEffect, useState } from "react";
-import useOnline from "../utils/hook/useOnline.js";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import useOnline from "../utils/hook/useOnline.js";
 import { BASE_URL } from "@/utils/constants/server_url";
 
 const Blogs = () => {

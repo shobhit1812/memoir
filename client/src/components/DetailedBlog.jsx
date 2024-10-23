@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ProgressBar, ThreeDots } from "react-loader-spinner";
 import { useParams, Link } from "react-router-dom";
 import { BASE_URL } from "@/utils/constants/server_url";
+import { ProgressBar, ThreeDots } from "react-loader-spinner";
 
 const DetailedBlog = () => {
   const { id } = useParams();
