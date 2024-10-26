@@ -74,15 +74,15 @@ const Navbar = () => {
           {isMenuOpen && (
             <div className="absolute right-0 mt-3 w-32 rounded-lg bg-gray-700 shadow-lg z-10">
               <ul className="grid w-[130px] gap-2 p-2 md:w-[130px] md:grid-cols-1 lg:w-[130px] text-lg">
-                <li>
+                <li className="hover:text-gray-400">
                   <Link to={`/browse/${user?._id}/create-blog`}>
                     Create Blog
                   </Link>
                 </li>
-                <li>
+                <li className="hover:text-gray-400">
                   <Link to={`/browse/${user?._id}/my-blogs`}>My Blogs</Link>
                 </li>
-                <li>
+                <li className="hover:text-gray-400">
                   <Link to={`/browse/${user?._id}/setting`}>Setting</Link>
                 </li>
                 <li>

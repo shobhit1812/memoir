@@ -5,6 +5,7 @@ import Browse from "./components/Browse";
 import Setting from "./components/Setting";
 import Register from "./components/Register";
 import EditBlog from "./components/EditBlog";
+import ErrorPage from "./components/ErrorPage";
 import CreateBlog from "./components/CreateBlog";
 import { createBrowserRouter } from "react-router-dom";
 const MyBlogs = lazy(() => import("./components/MyBlogs"));
@@ -14,6 +15,7 @@ const App = createBrowserRouter([
   {
     path: "/",
     element: <Login />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/register",
