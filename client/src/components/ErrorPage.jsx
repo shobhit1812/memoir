@@ -1,10 +1,12 @@
+import { useSelector } from "react-redux";
 import { useRouteError, Link } from "react-router-dom";
 
 const ErrorPage = () => {
   const err = useRouteError();
   const { status, statusText } = err;
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  // const user = JSON.parse(localStorage.getItem("user"));
+  const user = useSelector((store) => store?.user);
 
   return (
     <>
