@@ -1,18 +1,23 @@
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import { createSlice } from "@reduxjs/toolkit";
+
+const userPersistConfig = {
+  key: "user",
+  storage,
+  blacklist: ["_persist"], // Avoid persisting Redux Persist's own metadata
+};
 
 const userSlice = createSlice({
   name: "user",
   initialState: null,
   reducers: {
-    addUser: (_, action) => {
-      return action.payload;
-    },
-    removeUser: () => {
-      return null;
-    },
+    addUser: (_, action) => action.payload,
+    removeUser: () => null,
   },
 });
 
 export const { addUser, removeUser } = userSlice.actions;
 
-export default userSlice.reducer;
+// Wrap with persistReducer to enable persistent configuration
+export default persistReducer(userPersistConfig, userSlice.reducer);
