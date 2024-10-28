@@ -4,6 +4,7 @@ import {
   loginUser,
   logoutUser,
   getAllUsers,
+  changePassword,
 } from "../controllers/user.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
@@ -24,5 +25,6 @@ router.route("/login").post(loginUser);
 router.route("/logout").post(verifyJWT, logoutUser);
 // FIXME: apply verifyJWT before accessing all users.
 router.route("/get-all-users").get(getAllUsers);
+router.route("/change-password").patch(verifyJWT, changePassword);
 
 export default router;
