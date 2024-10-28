@@ -1,3 +1,0 @@
-### changeCurrentPassword implementation
-
-### error page
