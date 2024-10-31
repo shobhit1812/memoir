@@ -23,6 +23,10 @@ const Navbar = () => {
     setLoading(true);
 
     try {
+      /**
+       * null --> no data needs to be sent in the body
+       * withCredentials: true --> This option tells Axios to include credentials (like cookies) in the request. For example, if your authentication method involves a token cookie, setting withCredentials: true allows Axios to send it to the server.
+       */
       await axios.post(`${BASE_URL}/users/logout`, null, {
         withCredentials: true,
         headers: {
