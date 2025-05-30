@@ -5,7 +5,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const userPersistConfig = {
   key: "user",
   storage,
-  blacklist: ["_persist"], // Avoid persisting Redux Persist's own metadata
 };
 
 const userSlice = createSlice({

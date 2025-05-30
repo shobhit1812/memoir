@@ -15,6 +15,7 @@ import storage from "redux-persist/lib/storage"; // Default is local storage for
 const persistConfig = {
   key: "root",
   storage,
+  blacklist: ["_persist"], // Avoid persisting Redux Persist's own metadata
 };
 
 // Wrap the user reducer with persistReducer
