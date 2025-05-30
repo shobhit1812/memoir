@@ -5,15 +5,19 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import useOnline from "../utils/hook/useOnline.js";
+import { useSearchParams } from "react-router-dom";
 import { BASE_URL } from "@/utils/constants/server_url";
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [visiblePages, setVisiblePages] = useState([1, 2, 3]);
   const navigate = useNavigate();
   const cardsPerPage = 9;
   const isOnline = useOnline();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const pageFromUrl = parseInt(searchParams.get("page")) || 1;
+  const [currentPage, setCurrentPage] = useState(pageFromUrl);
 
   const getAllBlogs = async () => {
     const token = localStorage.getItem("accessToken");
@@ -53,20 +57,6 @@ const Blogs = () => {
 
   const totalPages = Math.ceil(blogs.length / cardsPerPage);
 
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-      updateVisiblePages(currentPage + 1);
-    }
-  };
-
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-      updateVisiblePages(currentPage - 1);
-    }
-  };
-
   const updateVisiblePages = (newPage) => {
     if (newPage > visiblePages[visiblePages.length - 1]) {
       setVisiblePages((prev) =>
@@ -81,7 +71,29 @@ const Blogs = () => {
 
   const handlePageClick = (page) => {
     setCurrentPage(page);
+    setSearchParams({ page });
     updateVisiblePages(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      const nextPage = currentPage + 1;
+      setCurrentPage(nextPage);
+      setSearchParams({ page: nextPage });
+      updateVisiblePages(nextPage);
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      const prevPage = currentPage - 1;
+      setCurrentPage(prevPage);
+      setSearchParams({ page: prevPage });
+      updateVisiblePages(prevPage);
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   if (!isOnline)
